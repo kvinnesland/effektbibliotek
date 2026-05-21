@@ -3,7 +3,7 @@
 > Updated at the end of every session. Read by Claude at startup.
 
 ## Current Phase
-IN PROGRESS — CR-002 implementert og verifisert. Klar for CR-003 (Mine caser / Oppfølging) eller videre utfylling.
+IN PROGRESS — CR-003 implementert. Klar for CR-004 (Bruksgodkjenning).
 
 ## Current Objectives
 1. Verifisere CR-002 manuelt i browser
@@ -20,7 +20,7 @@ master
 ## Active Change Requests
 - CR-001 (Done) — Auth
 - CR-002 (Done) — Case CRUD + Bibliotek
-- CR-003 (Ikke opprettet) — Mine caser + Oppfølging
+- CR-003 (Done) — Mine caser + Oppfølging
 - CR-004 (Ikke opprettet) — Bruksgodkjenning
 
 ## Recently Modified Systems
