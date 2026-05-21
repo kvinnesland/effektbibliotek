@@ -1,0 +1,44 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const navItems = [
+  { href: "/bibliotek", label: "Bibliotek" },
+  { href: "/mine-caser", label: "Mine caser" },
+  { href: "/oppfolging", label: "Oppfølging" },
+];
+
+export default function SideNav() {
+  const pathname = usePathname();
+
+  return (
+    <nav
+      className="fixed top-14 left-0 w-56 h-[calc(100vh-56px)] overflow-y-auto py-6 px-4"
+      style={{
+        backgroundColor: "var(--color-surface)",
+        borderRight: "1px solid var(--color-border-subtle)",
+      }}
+    >
+      <ul className="space-y-1">
+        {navItems.map(({ href, label }) => {
+          const active = pathname === href || pathname.startsWith(href + "/");
+          return (
+            <li key={href}>
+              <Link
+                href={href}
+                className="block px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                style={{
+                  backgroundColor: active ? "var(--color-accent-soft)" : "transparent",
+                  color: active ? "var(--color-accent)" : "var(--color-text-secondary)",
+                }}
+              >
+                {label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
