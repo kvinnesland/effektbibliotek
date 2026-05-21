@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -44,13 +44,14 @@ interface CaseData {
   ndaRestricted: boolean;
   anonymizedUseOnly: boolean;
   competitionUseAllowed: boolean;
+  ownerEmail: string;
 }
 
 function n(v: string | null | undefined): string {
   return v ?? "";
 }
 
-export default function EditCaseForm({ initial }: { initial: CaseData }) {
+export default function EditCaseForm({ initial, isAdmin }: { initial: CaseData; isAdmin?: boolean }) {
   const router = useRouter();
   const [form, setForm] = useState({
     customerName: n(initial.customerName),
@@ -80,10 +81,22 @@ export default function EditCaseForm({ initial }: { initial: CaseData }) {
     ndaRestricted: initial.ndaRestricted,
     anonymizedUseOnly: initial.anonymizedUseOnly,
     competitionUseAllowed: initial.competitionUseAllowed,
+    ownerEmail: initial.ownerEmail,
   });
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [allUsers, setAllUsers] = useState<{ email: string; name: string }[]>([]);
+
+  // fetch user list for admin owner-change
+  const loadedUsersRef = useRef(false);
+  if (isAdmin && !loadedUsersRef.current) {
+    loadedUsersRef.current = true;
+    fetch("/api/admin/users/list")
+      .then((r) => r.ok ? r.json() : [])
+      .then(setAllUsers)
+      .catch(() => {});
+  }
 
   function set(field: string, value: unknown) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -171,6 +184,15 @@ export default function EditCaseForm({ initial }: { initial: CaseData }) {
             </select>
           </Field>
         </div>
+        {isAdmin && allUsers.length > 0 && (
+          <Field label="Ansvarlig (admin)">
+            <select value={form.ownerEmail} onChange={(e) => set("ownerEmail", e.target.value)} className={inputCls} style={inputStyle}>
+              {allUsers.map((u) => (
+                <option key={u.email} value={u.email}>{u.name} ({u.email})</option>
+              ))}
+            </select>
+          </Field>
+        )}
       </FormSection>
 
       <FormSection title="Klassifisering">

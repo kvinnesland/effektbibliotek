@@ -32,7 +32,7 @@ export default async function RedigerCasePage({ params }: Props) {
         {c.customerName} — {c.title}
       </p>
 
-      <EditCaseForm initial={c} />
+      <EditCaseForm initial={c} isAdmin={session.isAdmin} />
     </div>
   );
 }

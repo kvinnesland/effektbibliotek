@@ -9,8 +9,9 @@ const navItems = [
   { href: "/oppfolging", label: "Oppfølging" },
 ];
 
-export default function SideNav() {
+export default function SideNav({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
+  const items = isAdmin ? [...navItems, { href: "/admin", label: "Admin" }] : navItems;
 
   return (
     <nav
@@ -21,7 +22,7 @@ export default function SideNav() {
       }}
     >
       <ul className="space-y-1">
-        {navItems.map(({ href, label }) => {
+        {items.map(({ href, label }) => {
           const active = pathname === href || pathname.startsWith(href + "/");
           return (
             <li key={href}>

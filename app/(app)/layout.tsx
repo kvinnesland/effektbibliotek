@@ -8,7 +8,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <div>
       <Topbar userName={session.userName} />
-      <SideNav />
+      <SideNav isAdmin={session.isAdmin} />
       <main
         className="min-h-screen"
         style={{ paddingTop: "56px", paddingLeft: "224px" }}

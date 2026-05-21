@@ -17,6 +17,7 @@ import {
 import StatusBadge from "@/components/cases/StatusBadge";
 import UsageBadge from "@/components/cases/UsageBadge";
 import ApprovalSection from "@/components/cases/ApprovalSection";
+import LinksSection from "@/components/cases/LinksSection";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -276,39 +277,7 @@ export default async function CaseDetailPage({ params }: Props) {
         </div>
       )}
 
-      {c.links.length > 0 && (
-        <div
-          className="rounded-xl p-5 mb-4"
-          style={{
-            backgroundColor: "var(--color-surface)",
-            border: "1px solid var(--color-border-subtle)",
-          }}
-        >
-          <p className="text-sm font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-            Materiale
-          </p>
-          <ul className="space-y-2">
-            {c.links.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium"
-                  style={{ color: "var(--color-accent)" }}
-                >
-                  {link.title}
-                </a>
-                {link.description && (
-                  <p className="text-xs mt-0.5" style={{ color: "var(--color-text-muted)" }}>
-                    {link.description}
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <LinksSection caseId={c.id} links={c.links} canManage={canEdit} />
 
       <ApprovalSection
         caseId={c.id}
