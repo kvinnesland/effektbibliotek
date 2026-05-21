@@ -16,6 +16,7 @@ import {
 } from "@/lib/labels";
 import StatusBadge from "@/components/cases/StatusBadge";
 import UsageBadge from "@/components/cases/UsageBadge";
+import ApprovalSection from "@/components/cases/ApprovalSection";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -29,6 +30,7 @@ export default async function CaseDetailPage({ params }: Props) {
       owner: { select: { name: true, email: true } },
       createdBy: { select: { name: true, email: true } },
       links: { orderBy: { createdAt: "asc" } },
+      usageApprovals: { orderBy: { submittedAt: "desc" }, take: 1 },
     },
   });
 
@@ -308,8 +310,15 @@ export default async function CaseDetailPage({ params }: Props) {
         </div>
       )}
 
+      <ApprovalSection
+        caseId={c.id}
+        status={c.usageApprovalStatus}
+        canManage={canEdit}
+        lastApproval={c.usageApprovals[0] ?? null}
+      />
+
       <div
-        className="rounded-xl p-4 text-xs"
+        className="rounded-xl p-4 text-xs mt-4"
         style={{
           backgroundColor: "var(--color-surface)",
           border: "1px solid var(--color-border-subtle)",
@@ -321,8 +330,6 @@ export default async function CaseDetailPage({ params }: Props) {
           <dd>{c.owner.name}</dd>
           <dt className="font-medium">Opprettet av:</dt>
           <dd>{c.createdBy.name}</dd>
-          <dt className="font-medium">Bruksgodkjenning:</dt>
-          <dd>{usageApprovalStatusLabels[c.usageApprovalStatus]}</dd>
           <dt className="font-medium">Opprettet:</dt>
           <dd>{formatDate(c.createdAt)}</dd>
           <dt className="font-medium">Oppdatert:</dt>
