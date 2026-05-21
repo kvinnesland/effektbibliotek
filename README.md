@@ -1,75 +1,36 @@
-# Claude Project Template
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A governed AI-native project template for Claude Code.
+## Getting Started
 
-## What This Is
-
-A reusable repository structure that gives Claude Code persistent session context, change governance, and architectural guardrails — across multiple sessions.
-
-## How to Use
-
-### Start a new project
+First, run the development server:
 
 ```bash
-# Clone this template
-git clone https://github.com/YOUR-USERNAME/claude-project-template my-new-project
-cd my-new-project
-
-# Remove template git history, start fresh
-rm -rf .git
-git init
-git add .
-git commit -m "chore: initialize from claude-project-template"
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### First steps
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1. Open the project in Claude Code: `claude` in the terminal
-2. Claude reads `.claude/CLAUDE.md` automatically
-3. Type `/start-session` — Claude will load state and guide you
-4. Fill in `specs/vision.md` with your product description
-5. Fill in `specs/requirements.md`
-6. Run `/create-cr` to create your first Change Request
-7. Start building
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Session workflow
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-```
-Start of session:   /start-session
-During session:     /create-cr  →  /implement  →  /review
-End of session:     /end-session
-```
+## Learn More
 
-## Structure
+To learn more about Next.js, take a look at the following resources:
 
-```
-.claude/
-  CLAUDE.md              ← Claude reads this automatically
-  commands/              ← /start-session, /end-session, /create-cr, /review, /implement
-  agents/                ← architect, backend, frontend, reviewer, security, qa
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-specs/                   ← Fill these in before writing code
-  vision.md
-  requirements.md
-  entities.md
-  flows.md
-  architecture.md
-  api.yaml
-  ui-spec.md
-  nfr.md
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-change-requests/         ← One file per CR
-  CR-TEMPLATE.md
+## Deploy on Vercel
 
-sessions/                ← Updated every session by Claude
-  CURRENT-STATE.md
-  IMPLEMENTATION-LEDGER.md
-  OPEN-ISSUES.md
-  DECISIONS.md
-  ARCHITECTURE-STATE.md
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-reviews/                 ← Checklists for review, architecture, security, UX
-rules/                   ← Governance rules Claude follows
-validation/              ← Validation script scaffolds (implement per project)
-generated/               ← AI-generated output (gitignored by default)
-```
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

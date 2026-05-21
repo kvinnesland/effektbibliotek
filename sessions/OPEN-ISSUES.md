@@ -16,9 +16,10 @@ Opened: YYYY-MM-DD
 ## Open Issues
 
 ISSUE-001
-Status: Open
+Status: Resolved
 Priority: High
 Area: specs/
 Description: Product vision and requirements not yet defined.
 Blocker for: All feature work
-Opened: YYYY-MM-DD
+Opened: 2026-05-21
+Resolved: 2026-05-21 — specs/vision.md and specs/requirements.md populated from 8 product documents.

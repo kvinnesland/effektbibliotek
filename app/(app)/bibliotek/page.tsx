@@ -50,22 +50,13 @@ export default function BibliotekPage() {
 
   return (
     <div>
-      <div className="flex items-start justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
-            Bibliotek
-          </h1>
-          <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-            Finn caser, tester og dokumentert læring fra Bas.
-          </p>
-        </div>
-        <Link
-          href="/case/ny"
-          className="px-4 py-2 text-sm font-medium text-white rounded-lg"
-          style={{ backgroundColor: "var(--color-accent)" }}
-        >
-          + Legg inn case
-        </Link>
+      <div className="mb-6">
+        <h1 className="text-2xl font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
+          Bibliotek
+        </h1>
+        <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
+          Finn caser, tester og dokumentert læring fra Bas.
+        </p>
       </div>
 
       <div className="flex gap-3 mb-6 flex-wrap">

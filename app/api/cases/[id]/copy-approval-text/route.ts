@@ -33,12 +33,12 @@ export async function POST(request: NextRequest, { params }: RouteContext) {
     });
   }
 
-  const origin = new URL(request.url).origin;
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? origin;
+  const appUrl = new URL(request.url).origin;
 
   const text = buildApprovalText({
     ownerName: c.owner.name,
     ownerEmail: c.owner.email,
+    caseTitle: c.title,
     caseId: c.id,
     token: c.usageApprovalToken,
     appUrl,
