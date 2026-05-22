@@ -35,3 +35,36 @@ ALTERNATIVES CONSIDERED: SvelteKit (mindre community, færre shadcn-ressurser). 
 RATIONALE: Next.js gir fullstack i én kodebase. Prisma gjør database-bytte til én linjeskift. Custom OTP har ingen ekstern avhengighet. Resend og Neon er isolert bak adapter-lag. Vercel Hobby er gratis og deployer Next.js uten konfigurasjon.
 CONSEQUENCES: Serverless 10s timeout (uproblematisk). E-post og auth er fullt kontrollerbare. Migrering til annen hosting krever ingen kodeendringer i forretningslogikk.
 DECIDED BY: human
+
+---
+
+DATE: 2026-05-21
+DECISION: Nodemailer + Gmail SMTP i stedet for Resend
+CONTEXT: Resend free tier kan kun sende til verifiserte e-postadresser uten domene-verifisering, noe som blokkerer e-post til kunder i beta.
+DECISION: Bruk Nodemailer med Gmail SMTP og App Password for e-postutsending.
+ALTERNATIVES CONSIDERED: Resend (fungerer ikke uten verifisert domene på free tier). Mailgun (kostnad).
+RATIONALE: Gmail SMTP er gratis, fungerer umiddelbart, og lar oss sende til vilkårlige adresser. App Password er sikker nok for beta.
+CONSEQUENCES: Daglig sendegrense ~500 e-post. Bør byttes til dedikert e-posttjeneste ved skalering. Endringen isolert til lib/email.ts.
+DECIDED BY: both
+
+---
+
+DATE: 2026-05-22
+DECISION: Godkjenningslenke bruker request.url.origin, ikke NEXT_PUBLIC_APP_URL
+CONTEXT: Under utvikling kjørte dev-serveren på port 3001 fordi 3000 var opptatt, men NEXT_PUBLIC_APP_URL pekte på localhost:3000, noe som ga ERR_CONNECTION_REFUSED på godkjenningslenken.
+DECISION: Alltid bruke `new URL(request.url).origin` for å bygge godkjenningslenker i API-routes.
+ALTERNATIVES CONSIDERED: Sette NEXT_PUBLIC_APP_URL riktig per miljø.
+RATIONALE: request.url.origin er alltid korrekt — riktig i prod (Vercel-URL), riktig i dev uavhengig av port. Eliminerer kilde til port-mismatch-feil.
+CONSEQUENCES: Godkjenningslenken fungerer automatisk i alle miljøer uten manuell env-konfigurasjon.
+DECIDED BY: Claude
+
+---
+
+DATE: 2026-05-22
+DECISION: prisma generate som del av build-script på Vercel
+CONTEXT: Prisma 7 med custom output-path (`app/generated/prisma`) genererer ikke klienten automatisk under `npm install` på Vercel.
+DECISION: Build-script er `prisma generate && next build`.
+ALTERNATIVES CONSIDERED: postinstall script; Vercel build command override.
+RATIONALE: Enklest å vedlikeholde, synlig i package.json, ingen ekstern Vercel-konfigurasjon nødvendig.
+CONSEQUENCES: Byggetid øker med ~2 sekunder. Prisma-klienten er alltid oppdatert med skjema ved deploy.
+DECIDED BY: Claude
