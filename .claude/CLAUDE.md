@@ -95,6 +95,7 @@ Claude MUST ALWAYS:
 |---|---|
 | `/start-session` | Load state, identify blockers, generate plan |
 | `/end-session` | Summarize work, update all orchestration files |
+| `/interview-and-define` | Interview plan, sharpen domain language, update CONTEXT.md |
 | `/create-cr` | Create a new change request with impact analysis |
 | `/review` | Run full review checklist |
 | `/implement` | Begin implementation from an approved CR |

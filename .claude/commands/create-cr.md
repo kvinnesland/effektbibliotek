@@ -2,7 +2,7 @@
 
 Execute these steps to create a new Change Request.
 
-> If the problem space is unclear or the domain model is involved, consider running `/grill-with-docs` first.
+> If the problem space is unclear or the domain model is involved, consider running `/interview-and-define` first.
 
 ## 1. Gather Information
 

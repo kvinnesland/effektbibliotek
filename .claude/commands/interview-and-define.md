@@ -1,4 +1,4 @@
-# /grill-with-docs
+# /interview-and-define
 
 Interview the user relentlessly about every aspect of their plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one by one.
 
