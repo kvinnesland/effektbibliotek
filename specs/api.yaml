@@ -1,0 +1,9 @@
+openapi: "3.1.0"
+info:
+  title: "[Project Name] API"
+  version: "1.0.0"
+  description: "Define all API endpoints here before implementation begins."
+
+servers:
+  - url: "http://localhost:3000/api/v1"
+    description: "Local development"
