@@ -2,6 +2,8 @@
 
 Execute these steps to create a new Change Request.
 
+> If the problem space is unclear or the domain model is involved, consider running `/grill-with-docs` first.
+
 ## 1. Gather Information
 
 Ask:

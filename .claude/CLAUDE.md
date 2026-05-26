@@ -28,7 +28,8 @@ Before ANY implementation work, Claude MUST:
 3. Read all active change requests in `/change-requests`
 4. Read impacted specs in `/specs`
 5. Validate architecture consistency against `sessions/ARCHITECTURE-STATE.md`
-6. Produce an explicit implementation plan and present it before proceeding
+6. If `CONTEXT.md` exists at the repo root, read it
+7. Produce an explicit implementation plan and present it before proceeding
 
 If any of these files are missing or incomplete, stop and flag it.
 

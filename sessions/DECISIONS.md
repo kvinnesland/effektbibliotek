@@ -2,7 +2,11 @@
 
 > Append-only. Document every significant architectural or governance decision.
 
-## Format
+---
+
+## Operational Decisions
+
+Format:
 ```
 DATE: YYYY-MM-DD
 DECISION: [short title]
@@ -68,3 +72,25 @@ ALTERNATIVES CONSIDERED: postinstall script; Vercel build command override.
 RATIONALE: Enklest å vedlikeholde, synlig i package.json, ingen ekstern Vercel-konfigurasjon nødvendig.
 CONSEQUENCES: Byggetid øker med ~2 sekunder. Prisma-klienten er alltid oppdatert med skjema ved deploy.
 DECIDED BY: Claude
+
+---
+
+## Architectural Decisions
+
+These are hard-to-reverse, structurally significant decisions worth preserving for future readers.
+Only add an entry when all three are true:
+1. Hard to reverse — changing it later has meaningful cost
+2. Surprising without context — a future reader would wonder "why did they do it this way?"
+3. Result of a real trade-off — genuine alternatives existed
+
+Format:
+```
+# [Short title]
+
+[1-3 sentences: context, what was decided, and why.]
+
+Status: accepted | deprecated | superseded by [title]
+Date: YYYY-MM-DD
+Considered alternatives: [only if rejection is non-obvious]
+Consequences: [only if non-obvious downstream effects]
+```
