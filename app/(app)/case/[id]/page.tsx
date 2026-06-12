@@ -75,6 +75,18 @@ export default async function CaseDetailPage({ params }: Props) {
         {c.title}
       </h1>
 
+      <div className="flex items-center gap-2 mb-5 px-4 py-3 rounded-xl" style={{ backgroundColor: "var(--color-surface)", border: "1px solid var(--color-border-subtle)" }}>
+        <div className="flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold flex-shrink-0" style={{ backgroundColor: "var(--color-accent-soft)", color: "var(--color-accent)" }}>
+          {(c.owner?.name ?? c.ownerEmail).charAt(0).toUpperCase()}
+        </div>
+        <div>
+          <p className="text-xs font-medium" style={{ color: "var(--color-text-muted)" }}>Ansvarlig</p>
+          <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
+            {c.owner?.name ?? c.ownerEmail}
+          </p>
+        </div>
+      </div>
+
       <div className="flex flex-wrap items-center gap-2 mb-6">
         <StatusBadge status={c.lifecycleStatus} />
         <UsageBadge level={c.usageLevel} />
