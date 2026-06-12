@@ -273,12 +273,15 @@ export default function EditCaseForm({ initial, isAdmin }: { initial: CaseData; 
         </div>
       </FormSection>
 
+      <FormSection title="Salg">
+        <Field label="Pitchtekst">
+          <textarea value={form.pitchText} onChange={(e) => set("pitchText", e.target.value)} rows={3} className={inputCls + " resize-y"} style={inputStyle} />
+        </Field>
+      </FormSection>
+
       <FormSection title="Kundevendt">
         <Field label="Kundevennlig beskrivelse">
           <textarea value={form.customerFacingSummary} onChange={(e) => set("customerFacingSummary", e.target.value)} rows={4} className={inputCls + " resize-y"} style={inputStyle} placeholder="Trygg tekst som kan vises til kunden" />
-        </Field>
-        <Field label="Pitchtekst">
-          <textarea value={form.pitchText} onChange={(e) => set("pitchText", e.target.value)} rows={3} className={inputCls + " resize-y"} style={inputStyle} />
         </Field>
       </FormSection>
 
