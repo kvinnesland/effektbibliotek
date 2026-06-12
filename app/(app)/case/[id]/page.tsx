@@ -264,11 +264,11 @@ export default async function CaseDetailPage({ params }: Props) {
         <div
           className="rounded-xl p-5 mb-4"
           style={{
-            backgroundColor: "var(--color-surface-muted)",
+            backgroundColor: "var(--color-error-bg)",
             border: "1px solid var(--color-border-subtle)",
           }}
         >
-          <p className="text-xs font-semibold mb-2" style={{ color: "var(--color-text-muted)" }}>
+          <p className="text-xs font-semibold mb-2" style={{ color: "var(--color-error-text)" }}>
             Interne notater
           </p>
           <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
