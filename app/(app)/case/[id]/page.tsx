@@ -17,7 +17,6 @@ import {
 import StatusBadge from "@/components/cases/StatusBadge";
 import UsageBadge from "@/components/cases/UsageBadge";
 import ApprovalSection from "@/components/cases/ApprovalSection";
-import LinksSection from "@/components/cases/LinksSection";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -30,7 +29,6 @@ export default async function CaseDetailPage({ params }: Props) {
     include: {
       owner: { select: { name: true, email: true } },
       createdBy: { select: { name: true, email: true } },
-      links: { orderBy: { createdAt: "asc" } },
       usageApprovals: { orderBy: { submittedAt: "desc" }, take: 1 },
     },
   });
@@ -76,6 +74,18 @@ export default async function CaseDetailPage({ params }: Props) {
       <h1 className="text-2xl font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
         {c.title}
       </h1>
+
+      <div className="flex items-center gap-2 mb-5 px-4 py-3 rounded-xl" style={{ backgroundColor: "var(--color-surface)", border: "1px solid var(--color-border-subtle)" }}>
+        <div className="flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold flex-shrink-0" style={{ backgroundColor: "var(--color-accent-soft)", color: "var(--color-accent)" }}>
+          {(c.owner?.name ?? c.ownerEmail).charAt(0).toUpperCase()}
+        </div>
+        <div>
+          <p className="text-xs font-medium" style={{ color: "var(--color-text-muted)" }}>Ansvarlig</p>
+          <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
+            {c.owner?.name ?? c.ownerEmail}
+          </p>
+        </div>
+      </div>
 
       <div className="flex flex-wrap items-center gap-2 mb-6">
         <StatusBadge status={c.lifecycleStatus} />
@@ -264,8 +274,8 @@ export default async function CaseDetailPage({ params }: Props) {
         <div
           className="rounded-xl p-5 mb-4"
           style={{
-            backgroundColor: "var(--color-error-bg)",
-            border: "1px solid var(--color-border-subtle)",
+            backgroundColor: "#F5D5CE",
+            border: "1px solid #E8B5AB",
           }}
         >
           <p className="text-xs font-semibold mb-2" style={{ color: "var(--color-error-text)" }}>
@@ -276,8 +286,6 @@ export default async function CaseDetailPage({ params }: Props) {
           </p>
         </div>
       )}
-
-      <LinksSection caseId={c.id} links={c.links} canManage={canEdit} />
 
       <ApprovalSection
         caseId={c.id}

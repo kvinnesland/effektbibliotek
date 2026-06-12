@@ -13,6 +13,8 @@ import {
   evidenceLevelLabels,
 } from "@/lib/labels";
 
+import LinksSection from "@/components/cases/LinksSection";
+
 type SelectValue = string;
 
 interface CaseData {
@@ -51,7 +53,15 @@ function n(v: string | null | undefined): string {
   return v ?? "";
 }
 
-export default function EditCaseForm({ initial, isAdmin }: { initial: CaseData; isAdmin?: boolean }) {
+interface LinkItem {
+  id: string;
+  title: string;
+  url: string;
+  type: string | null;
+  description: string | null;
+}
+
+export default function EditCaseForm({ initial, isAdmin, links }: { initial: CaseData; isAdmin?: boolean; links?: LinkItem[] }) {
   const router = useRouter();
   const [form, setForm] = useState({
     customerName: n(initial.customerName),
@@ -311,6 +321,8 @@ export default function EditCaseForm({ initial, isAdmin }: { initial: CaseData; 
           <textarea value={form.internalNotes} onChange={(e) => set("internalNotes", e.target.value)} rows={3} className={inputCls + " resize-y"} style={inputStyle} placeholder="Vises aldri til kunder" />
         </Field>
       </FormSection>
+
+      <LinksSection caseId={initial.id} links={links ?? []} canManage={true} />
 
       {error && (
         <p className="text-sm" style={{ color: "var(--color-error-text)" }}>

@@ -10,7 +10,10 @@ export default async function RedigerCasePage({ params }: Props) {
   const { id } = await params;
   const session = await requireSession();
 
-  const c = await prisma.case.findUnique({ where: { id } });
+  const c = await prisma.case.findUnique({
+    where: { id },
+    include: { links: { orderBy: { createdAt: "asc" } } },
+  });
   if (!c) notFound();
 
   if (c.ownerEmail !== session.userEmail && !session.isAdmin) {
@@ -32,7 +35,7 @@ export default async function RedigerCasePage({ params }: Props) {
         {c.customerName} — {c.title}
       </p>
 
-      <EditCaseForm initial={c} isAdmin={session.isAdmin} />
+      <EditCaseForm initial={c} isAdmin={session.isAdmin} links={c.links} />
     </div>
   );
 }
