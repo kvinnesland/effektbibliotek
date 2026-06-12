@@ -108,7 +108,7 @@ export default function NyCasePage() {
           <textarea
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
-            placeholder="Hva handlet casen om? Hva ble gjort?"
+            placeholder="Hva handler casen om? Hva skal testes?"
             rows={4}
             className="w-full px-4 py-2.5 text-sm rounded-lg outline-none resize-y"
             style={{
