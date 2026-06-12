@@ -273,9 +273,9 @@ export default function EditCaseForm({ initial, isAdmin }: { initial: CaseData; 
         </div>
       </FormSection>
 
-      <FormSection title="Salg">
+      <FormSection title="Innsalg">
         <Field label="Pitchtekst">
-          <textarea value={form.pitchText} onChange={(e) => set("pitchText", e.target.value)} rows={3} className={inputCls + " resize-y"} style={inputStyle} />
+          <textarea value={form.pitchText} onChange={(e) => set("pitchText", e.target.value)} rows={3} className={inputCls + " resize-y"} style={inputStyle} placeholder={'Hva ble brukt som innsalgsargument? Eks: "Kunden ba om det selv." "Det er mer å tjene på å vite dette enn å bruke tid på å diskutere og synse!"'} />
         </Field>
       </FormSection>
 
