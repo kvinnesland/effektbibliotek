@@ -91,7 +91,7 @@ export default function NyCasePage() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Kort, beskrivende tittel på casen"
+            placeholder="Kort, beskrivende tittel på casen (kan endres)"
             className="w-full px-4 py-2.5 text-sm rounded-lg outline-none"
             style={{
               backgroundColor: "var(--color-surface)",
