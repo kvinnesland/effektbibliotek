@@ -31,7 +31,9 @@ export async function proxy(request: NextRequest) {
   });
 
   if (!session.userEmail) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("redirectTo", pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   return response;

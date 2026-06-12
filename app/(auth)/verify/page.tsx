@@ -7,6 +7,8 @@ function VerifyForm() {
   const router = useRouter();
   const params = useSearchParams();
   const email = params.get("email") ?? "";
+  const rawRedirect = params.get("redirectTo") ?? "";
+  const redirectTo = rawRedirect.startsWith("/") ? rawRedirect : "/mine-caser";
 
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
@@ -36,7 +38,7 @@ function VerifyForm() {
       return;
     }
 
-    router.push("/bibliotek");
+    router.push(redirectTo);
   }
 
   async function handleResend() {
