@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const params = useSearchParams();
+  const redirectTo = params.get("redirectTo") ?? "";
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -28,7 +30,8 @@ export default function LoginPage() {
       return;
     }
 
-    router.push(`/verify?email=${encodeURIComponent(email)}`);
+    const verifyUrl = `/verify?email=${encodeURIComponent(email)}${redirectTo ? `&redirectTo=${encodeURIComponent(redirectTo)}` : ""}`;
+    router.push(verifyUrl);
   }
 
   return (
@@ -104,5 +107,13 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }
